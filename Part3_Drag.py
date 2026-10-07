@@ -8,7 +8,7 @@ class State:
     net_acceleration: float
     drag: float
     time: float
-    velocity: float = 0.0
+    velocity: float
 
 
 time_step = 0.01
@@ -19,7 +19,6 @@ def step (state:State) -> State:
     cross_sectional_area = 1.2
     drag_coefficient = 0.7
     air_density = 1.2
-    acceleration = 0.0
 
     if state.time <= 10.0:
         acceleration = 5.0
@@ -33,12 +32,12 @@ def step (state:State) -> State:
 
     new_velocity = state.velocity + new_net_acceleration * time_step
 
-
+    new_time = state.time + time_step,
 
     return State(
         net_acceleration = new_net_acceleration,
-        time = state.time + time_step,
         velocity = new_velocity,
+        time = new_time,
         drag = new_drag,
     )
 
