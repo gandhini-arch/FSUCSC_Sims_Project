@@ -5,8 +5,9 @@ import numpy as np
 
 @dataclass
 class State:
-    velocity: float = 25
+    velocity: float
     braking_force: float
+    acceleration: float = 25
     time: float
 
 time_step = 0.01
@@ -21,11 +22,16 @@ def step (state:State) -> State:
         driver_input = 1.0
 
     new_braking_force = driver_input * max_braking_capacity
-    acceleration = state.acceleration - (new_braking_force/mass)
+    
+    new_acceleration = state.acceleration - (new_braking_force/mass)
+    
     new_velocity = state.velocity + (acceleration * time_step)
+    
+    new_time = state.time + time_step
 
     return State(
         velocity = new_velocity,
         braking_force = new_braking_force,
-        time = state.time + time_step
+        time = new_time,
+        acceleration = new_acceleration
     )
