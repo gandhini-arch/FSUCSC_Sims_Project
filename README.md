@@ -1,5 +1,7 @@
 # FSUCSC_Sims_Project
 This is my sims project. I'm trying my best to try my best.
+Please read this before looking at my code. I want to tell the judges.
+
 It was hard since Python hasn't been something I've done in a while.
 Had to google and look at previous parts for each file. 
 I knew the idea of the program and even a basic structure, but the syntax was all I had to figure out.
