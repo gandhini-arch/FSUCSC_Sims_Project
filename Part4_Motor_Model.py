@@ -8,7 +8,7 @@ class State:
     propulsion_force: float
     acceleration: float
     time: float
-    velocity: float = 0
+    velocity: float
 
 time_step = 0.01
 
@@ -29,12 +29,13 @@ def step (state:State) -> State:
     propulsion_force = max_propulsion_force * throttle * (1 - (state.velocity/vmax))
     new_acceleration = propulsion_force / mass
     new_velocity = state.velocity + (new_acceleration * time_step)
+    new_time = state.time + time_step
 
 
     return State(
         propulsion_force = propulsion_force,
         acceleration = new_acceleration,
         velocity = new_velocity,
-        time = state.time + time_step,
+        time = new_time
     )
 
