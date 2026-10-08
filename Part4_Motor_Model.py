@@ -33,7 +33,7 @@ def step (state:State) -> State:
     new_velocity = state.velocity + (new_acceleration * time_step)
     
     new_time = state.time + time_step
-    new_xpos = state.xpos + state.velocity * new_time_step
+    new_xpos = state.xpos + state.velocity * time_step
     new_ypos = state.ypos
 
 
@@ -53,6 +53,15 @@ def animate (i):
     ax.set_ylim(0,10)
     return ax
 
+
+s0 = State(
+    propulsion_force = 0.0,
+    acceleration = 0.0,
+    time = 0.0,
+    velocity = 0.0,
+    xpos = 0.0,
+    ypos = 0.0
+)
 
 fig = plt.figure(figsize=(3,3), dpi=150)
 ax = fig.add_subplot(111)
