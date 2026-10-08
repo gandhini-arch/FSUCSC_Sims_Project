@@ -9,6 +9,7 @@ class State:
     drag: float
     time: float
     velocity: float
+    xpos: float = 0.0
 
 
 time_step = 0.01
@@ -32,19 +33,52 @@ def step (state:State) -> State:
 
     new_velocity = state.velocity + new_net_acceleration * time_step
 
-    new_time = state.time + time_step,
+    new_xpos = state.xpos + state.velocity * time_step
+
+    new_time = state.time + time_step
 
     return State(
         net_acceleration = new_net_acceleration,
         velocity = new_velocity,
         time = new_time,
         drag = new_drag
+        xpos = new_xpos
     )
 
+def animate(i):
+    global s0
 
-#if state.time > 10.0:
-#    acceleration = 0.0
-#    velocity = new_velocity
-#    if velocity <= 0.1:
-#        acceleration = 0.0
-#        velocity = new_velocity
+    s0 = step(s0)
+
+    ax.clear()
+
+    ax.scatter([s0.xpos], [0], s=700, c="pink", marker='s')
+
+    ax.set_xlim(0, 300)
+    ax.set_ylim(-2, 2)
+
+    return ax
+
+
+s0 = State(
+    net_acceleration = 0.0,
+    drag = 0.0,
+    time = 0.0,
+    velocity = 0.0,
+    xpos = 0.0
+)
+
+
+fig = plt.figure(figsize=(3,3), dpi=150)
+ax = fig.add_subplot(111)
+ax.grid()
+
+ax.set_xlim(0, 300)
+ax.set_ylim(-2, 2)
+
+# these lines are so the animation doesnt zoom in or out
+plt.pause(3)
+
+ani = animation.FuncAnimation(fig, animate, interval=0)
+
+plt.show()
