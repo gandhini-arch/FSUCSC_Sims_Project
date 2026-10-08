@@ -15,7 +15,7 @@ class State:
   ypos: float
      
 
-time_step = 0.01
+time_step = 0.05
 
 def step (state:State) -> State:
   max_propulsion_force = 2000
@@ -84,7 +84,7 @@ s0 = state(
 )
 
 
-fig = plt.figure(figsize=(3,3), dpi=150)
+fig = plt.figure(figsize=(3,3), dpi=200)
 ax = fig.add_subplot(111)
 ax.grid()
 ax.set_xlim(-2, 2)
