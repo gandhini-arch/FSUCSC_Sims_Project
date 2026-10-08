@@ -31,6 +31,7 @@ def step (state:State) -> State:
     propulsion_force = max_propulsion_force * throttle * (1 - (state.velocity/vmax))
     new_acceleration = propulsion_force / mass
     new_velocity = state.velocity + (new_acceleration * time_step)
+    
     new_time = state.time + time_step
     new_xpos = state.xpos + state.velocity * new_time_step
     new_ypos = state.ypos
