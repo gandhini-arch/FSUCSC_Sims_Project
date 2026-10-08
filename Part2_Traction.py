@@ -35,6 +35,10 @@ def step (state:State) -> State:
     new_lateral_acceleration = new_lateral_force/mass
     
     new_lateral_velocity = state.lateral_velocity + new_lateral_acceleration * time_step
+    
+    new_ypos = state.ypos + state.lateral_velocity * time_step
+    
+    new_xpos = state.xpos + forward_speed * time_step
 
     new_time = state.time + time_step
 
@@ -42,11 +46,13 @@ def step (state:State) -> State:
         lateral_velocity = new_lateral_velocity,
         slip_angle = new_slip_angle,
         time = new_time,
+        xpos = new_xpos,
+        ypos = new_ypos,
     )
 
 def animate (i):
     global s0
-    so = step(s)
+    s0 = step(s0)
     ax.clear()
     ax.scatter([s0.xpos],[s0.ypos],s = 700, c = "pink", marker = 's')
     ax.set_xlim(0,300)
