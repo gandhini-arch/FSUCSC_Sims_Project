@@ -27,19 +27,13 @@ def step (state:State) -> State:
         steer_angle = 5.0
 
     steer_radians = steer_angle * np.pi / 180
-
     new_slip_angle = steer_radians - state.lateral_velocity/forward_speed
-
     new_lateral_force = cornering_stiffness * new_slip_angle
-    
     new_lateral_acceleration = new_lateral_force/mass
-    
     new_lateral_velocity = state.lateral_velocity + new_lateral_acceleration * time_step
     
     new_ypos = state.ypos + state.lateral_velocity * time_step
-    
     new_xpos = state.xpos + forward_speed * time_step
-
     new_time = state.time + time_step
 
     return State(
