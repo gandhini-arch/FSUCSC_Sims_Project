@@ -41,7 +41,7 @@ def step (state:State) -> State:
         net_acceleration = new_net_acceleration,
         velocity = new_velocity,
         time = new_time,
-        drag = new_drag
+        drag = new_drag,
         xpos = new_xpos
     )
 
