@@ -12,7 +12,7 @@ class State:
     xpos: float
     ypos: float
 
-time_step = 0.01
+time_step = 0.05
 
 def step (state:State) -> State:
     max_braking_capacity = 1850
