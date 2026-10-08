@@ -47,10 +47,10 @@ def step (state:State) -> State:
   new_temperature = state.temperature + temperature_change
 
   return State(
-        propulsion_force=propulsion_force,
-        acceleration=new_acceleration,
-        velocity=new_velocity,
-        temperature=new_temperature,
-        heat_energy=new_heat_energy,
-        time=new_time
+      propulsion_force=propulsion_force,
+      acceleration=new_acceleration,
+      velocity=new_velocity,
+      temperature=new_temperature,
+      heat_energy=new_heat_energy,
+      time=new_time
   )
