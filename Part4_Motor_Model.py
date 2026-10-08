@@ -9,6 +9,8 @@ class State:
     acceleration: float
     time: float
     velocity: float
+    xpos: float
+    ypos: float
 
 time_step = 0.01
 
@@ -30,6 +32,8 @@ def step (state:State) -> State:
     new_acceleration = propulsion_force / mass
     new_velocity = state.velocity + (new_acceleration * time_step)
     new_time = state.time + time_step
+    new_xpos = state.xpos + state.velocity * new_time_step
+    new_ypos = state.ypos
 
 
     return State(
@@ -38,4 +42,18 @@ def step (state:State) -> State:
         velocity = new_velocity,
         time = new_time
     )
+
+def animate (i):
+    pass
+
+
+fig = plt.figure(figsize=(3,3), dpi=150)
+ax = fig.add_subplot(111)
+ax.grid()
+ax.set_xlim(-2, 2)
+ax.set_ylim(-2, 2)
+# these lines are so the animation doesnt zoom in or out
+plt.pause(3)
+ani = animation.FuncAnimation(fig, animate, interval=0)
+plt.show()
 
