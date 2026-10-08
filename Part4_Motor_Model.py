@@ -44,7 +44,13 @@ def step (state:State) -> State:
     )
 
 def animate (i):
-    pass
+    global s0
+    so = step(s)
+    ax.clear()
+    ax.scatter([s0.xpos],[s0.ypos],s = 700, c = "pink", marker = 's')
+    ax.set_xlim(0,300)
+    ax.set_ylim(0,10)
+    return ax
 
 
 fig = plt.figure(figsize=(3,3), dpi=150)
