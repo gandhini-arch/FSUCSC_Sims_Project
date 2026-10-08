@@ -28,13 +28,10 @@ def step (state:State) -> State:
 
 
     new_drag = 0.5 * cross_sectional_area * drag_coefficient * air_density * state.velocity**2
-
     new_net_acceleration = acceleration - new_drag/mass
-
     new_velocity = state.velocity + new_net_acceleration * time_step
 
     new_xpos = state.xpos + state.velocity * time_step
-
     new_time = state.time + time_step
 
     return State(
