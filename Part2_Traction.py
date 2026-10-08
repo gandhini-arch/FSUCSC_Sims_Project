@@ -8,6 +8,8 @@ class State:
     time: float
     slip_angle: float
     lateral_velocity: float = 0.0
+    xpos: float = 0.0
+    ypos: float = 0.0
     
 
 time_step = 0.01
@@ -28,7 +30,7 @@ def step (state:State) -> State:
 
     new_slip_angle = steer_radians - state.lateral_velocity/forward_speed
 
-    new_lateral_force = cornering_stiffness * slip_angle
+    new_lateral_force = cornering_stiffness * new_slip_angle
     
     new_lateral_acceleration = new_lateral_force/mass
     
@@ -42,3 +44,30 @@ def step (state:State) -> State:
         time = new_time,
     )
 
+def animate (i):
+    global s0
+    so = step(s)
+    ax.clear()
+    ax.scatter([s0.xpos],[s0.ypos],s = 700, c = "pink", marker = 's')
+    ax.set_xlim(0,300)
+    ax.set_ylim(0,10)
+    return ax
+
+s0 = State(
+    time = 0.0,
+    slip_angle = 0.0,
+    lateral_velocity = 0.0,
+    xpos = 0.0,
+    ypos = 0.0
+)
+
+
+fig = plt.figure(figsize=(3,3), dpi=150)
+ax = fig.add_subplot(111)
+ax.grid()
+ax.set_xlim(-2, 2)
+ax.set_ylim(-2, 2)
+# these lines are so the animation doesnt zoom in or out
+plt.pause(3)
+ani = animation.FuncAnimation(fig, animate, interval=0)
+plt.show()
