@@ -8,6 +8,7 @@ class State:
     time: float
     slip_angle: float
     lateral_velocity: float = 0.0
+    
 
 time_step = 0.01
 
