@@ -1,0 +1,74 @@
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from dataclasses import dataclass
+import numpy as np
+
+@dataclass
+class State:
+    xvel:float
+    time:float
+    xpos:float
+    ypos:float
+
+time_step = 0.05
+
+def step (state:State) -> State:
+    mass = 300
+    radius = 0.216
+    gear_ratio = 3
+    max_torque = 180
+
+    if state.time <= 7:
+        driver_input = state.time/7
+
+    elif state.time <= 22:
+        driver_input = 1.0
+
+    else:
+        driver_input = 0.0
+
+    command_torque = max_torque * driver_input
+    force_at_wheels = (command_torque * gear_ratio)/radius
+
+    acceleration = force_at_wheels/mass
+
+    new_vel = state.xvel + acceleration * time_step
+    new_xpos = state.xpos + state.xvel * time_step
+    new_time = state.time + time_step
+
+
+    newState = State(
+        xvel=new_vel,
+        time=new_time,
+        xpos=new_xpos,
+        ypos=0,
+    )
+
+    return newState
+
+def animate (i):
+    global s0
+    s0 = step(s0)
+    ax.clear()
+    ax.scatter([s0.xpos],[s0.ypos],s = 700, c = "pink", marker = 's')
+    ax.set_xlim(0,300)
+    ax.set_ylim(0,10)
+    return ax
+
+s0 = State(
+    xvel=0,
+    time=0,
+    xpos=0,
+    ypos=0
+)
+
+
+fig = plt.figure(figsize=(3,3), dpi=200)
+ax = fig.add_subplot(111)
+ax.grid()
+ax.set_xlim(-5, 5)
+ax.set_ylim(-5, 5)
+# these lines are so the animation doesnt zoom in or out
+plt.pause(3)
+ani = animation.FuncAnimation(fig, animate, interval= 20)
+plt.show()
