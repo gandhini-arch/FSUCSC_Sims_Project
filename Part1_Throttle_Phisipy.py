@@ -3,6 +3,8 @@ import matplotlib.animation as animation
 from dataclasses import dataclass
 import numpy as np
 
+from physipy import units, constants, set_favunit, setup_matplotlib
+
 @dataclass
 class State:
     xvel:float
@@ -11,6 +13,7 @@ class State:
     ypos:float
 
 time_step = 0.05
+kg = units["kg"]
 
 def step (state:State) -> State:
     mass = 300
@@ -66,8 +69,9 @@ s0 = State(
 fig = plt.figure(figsize=(3,3), dpi=200)
 ax = fig.add_subplot(111)
 ax.grid()
-ax.set_xlim(-5, 5)
-ax.set_ylim(-5, 5)
+#ax.set_xlim(-5, 5)
+#ax.set_ylim(-5, 5)
+plt.plot(new_xpos, ypos)
 # these lines are so the animation doesnt zoom in or out
 plt.pause(3)
 ani = animation.FuncAnimation(fig, animate, interval= 20)
